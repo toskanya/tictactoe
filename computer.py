@@ -20,14 +20,6 @@ class Computer():
         state[x][y] = player
         return state
     
-    def _player(self, state):
-        count = 0
-        for row in state:
-            for cell in row:
-                if cell:
-                    count += 1
-        return -1 if count % 2 == 0 else 1
-    
     def _value(self, state): 
         winner = None
 
@@ -65,13 +57,6 @@ class Computer():
                     winner = 0
             
         return winner
-    
-    def _playing(self, state):        
-        for row in state:
-            for cell in row:
-                if not cell:
-                    return True
-        return False        
     
     def _minimax(self, state, player):
         winner = self._value(state)

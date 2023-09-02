@@ -1,5 +1,5 @@
 from graphic import *
-from minimax import *
+from computer import *
 import os
 
 def check(grid_matrix): 
