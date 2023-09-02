@@ -58,7 +58,7 @@ class Computer():
             
         return winner
     
-    def _minimax(self, state, player):
+    def _minimax(self, state, player, alpha, beta):
         winner = self._value(state)
         
         if winner is not None:
@@ -68,14 +68,22 @@ class Computer():
             value = +999
             for action in self._actions(state, player):
                 next_state = self._result(copy.deepcopy(state), action)
-                value = min(value, self._minimax(next_state, +1))
+                eval = self._minimax(next_state, +1, alpha, beta)
+                value = min(value, eval)
+                beta = min(beta, eval)
+                if alpha >= beta:
+                    break
             return value
         
         if player == +1:
             value = -999
             for action in self._actions(state, player):
                 next_state = self._result(copy.deepcopy(state), action)
-                value = max(value, self._minimax(next_state, -1))
+                eval = self._minimax(next_state, -1, alpha, beta)
+                value = max(value, eval)
+                beta = max(beta, eval)
+                if alpha >= beta:
+                    break
             return value
         
     def choice(self, state):
@@ -85,7 +93,7 @@ class Computer():
             for y, cell in enumerate(row):
                 if not cell:
                     state[x][y] = self.ai
-                    value = self._minimax(state, self.ai * -1)
+                    value = self._minimax(state, self.ai * -1, -999, 999)
                     state[x][y] = 0
                     
                     if self.ai == 1 and best_value < value:

@@ -84,16 +84,15 @@ def play():
                     
                     grid_obj.set(grid_matrix)
                     screen.drawMarker(grid_obj)
-                    
-                    if player == 1:
-                        grid_matrix = AI.choice(grid_matrix)
-                        player *= -1
-                    
-                    grid_obj.set(grid_matrix)
-                    screen.drawMarker(grid_obj)
-                    winner = check(grid_matrix)
 
-            
+            if player == 1:
+                grid_matrix = AI.choice(grid_matrix)
+                player *= -1
+                grid_obj.set(grid_matrix)
+                screen.drawMarker(grid_obj)
+                
+        winner = check(grid_matrix)
+        
                 
         pygame.display.flip()
 
